@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 189456789728-4
+      author: anto
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  defaultValueComputed: "gen_random_uuid()"
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: event_pkey
+                  name: id
+                  type: uuid
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: event
+
