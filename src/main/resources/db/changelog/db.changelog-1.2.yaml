@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: 189456789728-6
+      author: anto
+      changes:
+        - renameColumn:
+            tableName: event
+            newColumnName: type
+            oldColumnName: name
+

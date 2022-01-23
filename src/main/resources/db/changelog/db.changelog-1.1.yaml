@@ -3,7 +3,12 @@ databaseChangeLog:
       id: 189456789728-5
       author: anto
       changes:
-        - renameColumn:
+        - addColumn:
             tableName: event
-            newColumnName: type
-            oldColumnName: name
+            columns:
+              - column:
+                  name: created
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: "now()"
