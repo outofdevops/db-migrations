@@ -7,15 +7,12 @@ import org.springframework.web.server.ResponseStatusException
 import java.net.URI
 import java.util.*
 
-
-
-
 @RestController
 class ReSTController(val service: EventService) {
 
     @PostMapping("/v1.0/events")
     fun post(@RequestBody event: Event): ResponseEntity<Event> {
-        val location: URI = URI.create(String.format("/v1.0/events/%s", service.post(event).id))
+        val location: URI = URI.create(String.format("/v1.0/events/%s", service.create(event).id))
 
         return ResponseEntity.created(location).build()
     }
@@ -24,15 +21,14 @@ class ReSTController(val service: EventService) {
     fun index(): MutableIterable<Event> = service.allEvents()
 
     @GetMapping("/v1.0/events/{id}")
-    fun get(@PathVariable id: String): Optional<Event> {
+    fun get(@PathVariable id: String): Event {
         try {
             UUID.fromString(id)
         } catch (ex: IllegalArgumentException ) {
             throw ResponseStatusException(HttpStatus.NOT_FOUND, "Event ID Not Found", ex)
         }
 
-        return service.findEvent(id)
+        return service.findEvent(id).orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "Event ID Not Found") }
     }
-
 
 }

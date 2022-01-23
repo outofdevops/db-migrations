@@ -10,7 +10,7 @@ class EventService(val db: EventRepository) {
 
     fun findEvent(id: String): Optional<Event> = db.findById(id)
 
-    fun post(event: Event): Event {
+    fun create(event: Event): Event {
         return db.save(event)
     }
 }

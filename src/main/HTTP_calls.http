@@ -21,3 +21,11 @@ Content-Type: application/json
 }) %}
 
 
+### Event Not Found
+
+GET http://localhost:8080/v1.0/events/b29c0c2c-a929-4253-bb5a-87a78b41727d
+Content-Type: application/json
+
+> {% client.test("Event Not Found", function() {
+    client.assert(response.status === 404, "Response Status is not 404")
+}) %}
