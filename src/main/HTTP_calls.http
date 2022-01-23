@@ -1,0 +1,23 @@
+### Create an Event
+
+POST http://localhost:8080/v1.0/events
+Content-Type: application/json
+
+{
+  "name": "new_subscriber"
+}
+
+> {% client.test("Successful POST Request", function() {
+    client.assert(response.status === 201, "Response Status is not 201")
+}) %}
+
+### Get All Events
+
+GET http://localhost:8080/v1.0/events
+Content-Type: application/json
+
+> {% client.test("Successful GET Request", function() {
+    client.assert(response.status === 200, "Response Status is not 200")
+}) %}
+
+
